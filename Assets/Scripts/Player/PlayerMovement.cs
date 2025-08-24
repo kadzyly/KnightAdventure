@@ -28,23 +28,23 @@ namespace Player
             }
         }
 
-        void Awake()
+        private void Awake()
         {
             _rigidbody2D =  GetComponent<Rigidbody2D>();
         }
         
-        void Start()
+        private void Start()
         {
             var inputReader = GetComponent<PlayerInputReader>();
             inputReader.OnMove += SetMoveInput;
         }
 
-        void SetMoveInput(Vector2 direction)
+        private void SetMoveInput(Vector2 direction)
         {
             _moveInput = direction;
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             IsMoving = _moveInput != Vector2.zero;
             _rigidbody2D.linearVelocity = _moveInput.normalized * _speed;
