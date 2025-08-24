@@ -7,24 +7,27 @@ namespace Player
     {
         private Animator _animator;
         [SerializeField] private PlayerMovement _playerMovement;
-        private bool _currentRunningState = false;
         
         private const string IS_RUNNING = "isRunning";
 
         private void Awake()
         {
-           _animator = GetComponentInChildren<Animator>();
+           _animator = GetComponent<Animator>();
         }
 
-        private void Update()
+        private void OnEnable()
         {
-            bool isRun = _playerMovement.IsMoving;
+            _playerMovement.OnMoovingStateChanged += HandleMoving;
+        }
 
-            if (_currentRunningState != isRun)
-            {
-                _currentRunningState = isRun;
-                _animator.SetBool(IS_RUNNING, isRun);
-            }
+        private void OnDisable()
+        {
+            _playerMovement.OnMoovingStateChanged -= HandleMoving;
+        }
+
+        void HandleMoving(bool isMoving)
+        {
+            _animator.SetBool(IS_RUNNING, isMoving);
         }
     }
 }

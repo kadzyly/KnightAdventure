@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Player 
@@ -5,12 +6,27 @@ namespace Player
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour
     {
+        public event Action<bool> OnMoovingStateChanged;
+        
         private Rigidbody2D _rigidbody2D;
         private Vector2 _moveInput;
 
         [SerializeField] private float _speed = 5f;
 
-        public bool IsMoving { get; private set; }
+        private bool _isMoving;
+
+        public bool IsMoving
+        {
+            get => _isMoving;
+            private set
+            {
+                if (value != _isMoving)
+                {
+                    _isMoving = value;
+                    OnMoovingStateChanged?.Invoke(_isMoving);
+                }
+            }
+        }
 
         void Awake()
         {
