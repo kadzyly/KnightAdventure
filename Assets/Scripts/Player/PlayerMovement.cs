@@ -6,7 +6,7 @@ namespace Player
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour
     {
-        public event Action<bool> OnMoovingStateChanged;
+        public event Action<bool> OnMovingStateChanged;
         
         private Rigidbody2D _rigidbody2D;
         private Vector2 _moveInput;
@@ -23,7 +23,7 @@ namespace Player
                 if (value != _isMoving)
                 {
                     _isMoving = value;
-                    OnMoovingStateChanged?.Invoke(_isMoving);
+                    OnMovingStateChanged?.Invoke(_isMoving);
                 }
             }
         }

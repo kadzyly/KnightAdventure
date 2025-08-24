@@ -17,12 +17,12 @@ namespace Player
 
         private void OnEnable()
         {
-            _playerMovement.OnMoovingStateChanged += HandleMoving;
+            _playerMovement.OnMovingStateChanged += HandleMoving;
         }
 
         private void OnDisable()
         {
-            _playerMovement.OnMoovingStateChanged -= HandleMoving;
+            _playerMovement.OnMovingStateChanged -= HandleMoving;
         }
 
         void HandleMoving(bool isMoving)
